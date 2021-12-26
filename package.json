@@ -1,5 +1,26 @@
 {
   "dependencies": {
     "ws": "^8.4.0"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "webrtc-demo",
+  "version": "1.0.0",
+  "main": "client.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muba00/webrtc-demo.git"
+  },
+  "author": "Mubariz Hajimuradov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/muba00/webrtc-demo/issues"
+  },
+  "homepage": "https://github.com/muba00/webrtc-demo#readme",
+  "description": "Basic webrtc example",
+  "keywords": [
+    "webrtc"
+  ]
 }
