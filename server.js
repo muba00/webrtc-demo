@@ -6,7 +6,7 @@ const WebSocket = require('ws')
 
 
 
-/* !! required
+// !! required
 const server_config = {
     key: fs.readFileSync('key.pem'),
     cert: fs.readFileSync('cert.pem')
@@ -35,12 +35,14 @@ const httpsServer = https.createServer(server_config, handleRequest)
 httpsServer.listen(8443)
 
 // ----------------------------------------------------------------------------------------
-*/
 
 
 
 
-const server = new WebSocket.Server({ port: 8080 })
+
+// WebSocket Server
+
+const server = new WebSocket.Server({ port: 8081 })
 
 const broadcast = (server, data) => {
     server.clients.forEach((client) => {

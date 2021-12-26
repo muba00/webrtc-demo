@@ -51,7 +51,7 @@ function setup_local_stream() {
                 v.srcObject = stream
             }).catch(error_handler)
             .then(() => {
-                socket = new WebSocket('ws://localhost:8080')
+                socket = new WebSocket('ws://localhost:8081')
                 socket.onmessage = (m) => socket_on_message(m)
                 socket.onopen = () => socket_on_open()
             }).catch(error_handler)
@@ -81,7 +81,7 @@ function ice_candidate(e, uuid) {
 }
 
 function setup_stream(e, uuid) {
-    console.log('setup_stream called, ', uuid)
+    //console.log('setup_stream called, ', uuid)
     let vc = document.createElement('div')
     vc.setAttribute('class', 'vc')
     vc.setAttribute('id', uuid)
@@ -97,7 +97,11 @@ function setup_stream(e, uuid) {
 }
 
 function check_disconnect(e, uuid) {
-    //todo
+    let state = peers[uuid].pc.iceConnectionState
+    if (state === "failed" || state === "closed" || state === "disconnected") {
+        delete peers[uuid]
+        document.getElementById(uuid).remove()
+    }
 }
 
 function created_description(desc, uuid) {
