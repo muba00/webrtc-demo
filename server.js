@@ -32,7 +32,7 @@ const handleRequest = function (request, response) {
 }
 
 const httpsServer = https.createServer(server_config, handleRequest)
-httpsServer.listen(3000)
+httpsServer.listen(8443)
 
 // ----------------------------------------------------------------------------------------
 
