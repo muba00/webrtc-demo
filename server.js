@@ -6,7 +6,7 @@ const WebSocket = require('ws')
 
 
 
-// !! required
+/* !! required
 const server_config = {
     key: fs.readFileSync('key.pem'),
     cert: fs.readFileSync('cert.pem')
@@ -35,7 +35,7 @@ const httpsServer = https.createServer(server_config, handleRequest)
 httpsServer.listen(8443)
 
 // ----------------------------------------------------------------------------------------
-
+*/
 
 
 
