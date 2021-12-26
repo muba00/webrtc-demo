@@ -17,16 +17,16 @@ const handleRequest = function (request, response) {
         response.writeHead(200, { 'Content-Type': 'application/javascript' })
         response.end(fs.readFileSync('client.js'))
     } else if (request.url === '/style.css') {
-        response.writeHead(200, { 'Content-Type': 'text/css' });
-        response.end(fs.readFileSync('style.css'));
+        response.writeHead(200, { 'Content-Type': 'text/css' })
+        response.end(fs.readFileSync('style.css'))
     } else {
-        response.writeHead(200, { 'Content-Type': 'text/html' });
-        response.end(fs.readFileSync('index.html'));
+        response.writeHead(200, { 'Content-Type': 'text/html' })
+        response.end(fs.readFileSync('index.html'))
     }
 };
 
-const httpsServer = https.createServer(serverConfig, handleRequest);
-httpsServer.listen(HTTPS_PORT);
+const httpsServer = https.createServer(serverConfig, handleRequest)
+httpsServer.listen()
 
 // ----------------------------------------------------------------------------------------
 
