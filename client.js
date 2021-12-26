@@ -81,19 +81,21 @@ function ice_candidate(e, uuid) {
 }
 
 function setup_stream(e, uuid) {
-    //console.log('setup_stream called, ', uuid)
-    let vc = document.createElement('div')
-    vc.setAttribute('class', 'vc')
-    vc.setAttribute('id', uuid)
+    console.log('setup_stream called, ', uuid)
+    if (!document.getElementById(uuid)) {
+        let vc = document.createElement('div')
+        vc.setAttribute('class', 'vc')
+        vc.setAttribute('id', uuid)
 
-    let v = document.createElement('video')
-    v.setAttribute('autoplay', '')
-    v.setAttribute('muted', '')
+        let v = document.createElement('video')
+        v.setAttribute('autoplay', '')
+        v.setAttribute('muted', '')
 
-    v.srcObject = e.streams[0]
+        v.srcObject = e.streams[0]
 
-    vc.appendChild(v)
-    app.appendChild(vc)
+        vc.appendChild(v)
+        app.appendChild(vc)
+    }
 }
 
 function check_disconnect(e, uuid) {
@@ -113,7 +115,7 @@ function created_description(desc, uuid) {
 
 function socket_on_message(m) {
     m = JSON.parse(m.data)
-    console.log('socket.onmessage fired ', m)
+    //console.log('socket.onmessage fired ', m)
     let peer_uuid = m.uuid
 
     // ignore messages from ourselves
