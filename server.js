@@ -6,6 +6,12 @@ const WebSocket = require('ws')
 
 
 
+// !! required
+const server_config = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+}
+
 // ----------------------------------------------------------------------------------------
 
 // Create a server for the client html page
@@ -23,10 +29,10 @@ const handleRequest = function (request, response) {
         response.writeHead(200, { 'Content-Type': 'text/html' })
         response.end(fs.readFileSync('index.html'))
     }
-};
+}
 
-const httpsServer = https.createServer(serverConfig, handleRequest)
-httpsServer.listen()
+const httpsServer = https.createServer(server_config, handleRequest)
+httpsServer.listen(3000)
 
 // ----------------------------------------------------------------------------------------
 
