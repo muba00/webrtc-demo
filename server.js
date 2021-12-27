@@ -38,7 +38,7 @@ var server = https.createServer(options)
 app.listen(PORT)
 
 
-const ws_server = new WebSocket.Server({ server })
+const ws_server = new WebSocket.Server({ port: 8433 })
 
 const broadcast = (ws_server, data) => {
     ws_server.clients.forEach((client) => {
