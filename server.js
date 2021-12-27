@@ -32,12 +32,12 @@ var options = {
     cert: cert
 }
 
-var server = https.createServer(options, app)
+//var server = https.createServer(options, app)
 //server.listen(PORT)
 app.listen(PORT)
 
 
-const ws_server = new WebSocket.Server({ server })
+const ws_server = new WebSocket.Server({ app })
 
 const broadcast = (ws_server, data) => {
     ws_server.clients.forEach((client) => {
