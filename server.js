@@ -10,13 +10,6 @@ const WebSocket = require('ws')
 const PORT = process.env.PORT || 3000
 const app = express()
 
-var key = fs.readFileSync(path.join(__dirname + '/certs/key.pem'))
-var cert = fs.readFileSync(path.join(__dirname + '/certs/cert.pem'))
-var options = {
-    key: key,
-    cert: cert
-}
-
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/index.html'))
@@ -29,15 +22,24 @@ app.get('/client.js', (req, res) => {
 app.get('/style.css', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/style.css'))
 })
-
-
-var server = https.createServer(options, app)
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 
 
 
-const ws_server = new WebSocket.Server({ server: server })
+
+
+
+var server = https.createServer(options)
+
+var key = fs.readFileSync(path.join(__dirname + '/certs/key.pem'))
+var cert = fs.readFileSync(path.join(__dirname + '/certs/cert.pem'))
+var options = {
+    key: key,
+    cert: cert
+}
+
+const ws_server = new WebSocket.Server({ server })
 
 const broadcast = (ws_server, data) => {
     ws_server.clients.forEach((client) => {
