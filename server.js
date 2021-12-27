@@ -22,15 +22,8 @@ app.get('/client.js', (req, res) => {
 app.get('/style.css', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/style.css'))
 })
-app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 
-
-
-
-
-
-var server = https.createServer(options)
 
 var key = fs.readFileSync(path.join(__dirname + '/certs/key.pem'))
 var cert = fs.readFileSync(path.join(__dirname + '/certs/cert.pem'))
@@ -38,6 +31,10 @@ var options = {
     key: key,
     cert: cert
 }
+
+var server = https.createServer(options, app)
+server.listen(8443)
+
 
 const ws_server = new WebSocket.Server({ server })
 
