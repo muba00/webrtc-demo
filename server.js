@@ -1,5 +1,7 @@
 
 const express = require('express')
+const path = require('path')
+
 const WebSocket = require('ws')
 
 
@@ -7,8 +9,17 @@ const PORT = 3000
 const app = express()
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.sendFile(path.join(__dirname, '/client/index.html'))
 })
+
+app.get('/client.js', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/client.js'))
+})
+
+app.get('/style.css', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/style.css'))
+})
+
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 

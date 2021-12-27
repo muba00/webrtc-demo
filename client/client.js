@@ -52,7 +52,7 @@ function setup_local_stream() {
                 v.srcObject = stream
             }).catch(error_handler)
             .then(() => {
-                socket = new WebSocket('ws://localhost:8081')
+                socket = new WebSocket('ws://' + window.location.hostname + ':8081')
                 socket.onmessage = (m) => socket_on_message(m)
                 socket.onopen = () => socket_on_open()
             }).catch(error_handler)
