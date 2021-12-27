@@ -32,7 +32,7 @@ app.get('/style.css', (req, res) => {
 
 
 var server = https.createServer(options, app)
-server.listen(PORT, () => console.log(`Listening on ${PORT}`))
+app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 
 
