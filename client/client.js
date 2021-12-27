@@ -24,8 +24,8 @@ start()
 
 
 function start() {
-
     setup_local_stream()
+    window.addEventListener('resize', resize_layout)
 }
 
 
@@ -39,10 +39,11 @@ function setup_local_stream() {
 
     let v = document.createElement('video')
     v.setAttribute('autoplay', '')
-    v.setAttribute('muted', '')
+    v.muted = 'muted'
 
     vc.appendChild(v)
     app.appendChild(vc)
+    resize_layout()
 
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia(call_settings)
@@ -89,12 +90,12 @@ function setup_stream(e, uuid) {
 
         let v = document.createElement('video')
         v.setAttribute('autoplay', '')
-        v.setAttribute('muted', '')
 
         v.srcObject = e.streams[0]
 
         vc.appendChild(v)
         app.appendChild(vc)
+        resize_layout()
     }
 }
 
@@ -103,6 +104,7 @@ function check_disconnect(e, uuid) {
     if (state === "failed" || state === "closed" || state === "disconnected") {
         delete peers[uuid]
         document.getElementById(uuid).remove()
+        resize_layout()
     }
 }
 
@@ -155,6 +157,63 @@ function error_handler(error) {
     console.log(error)
 }
 
+
+function resize_layout() {
+    let video_count = app.children.length
+    let ow = app.offsetWidth
+    let oh = app.offsetHeight
+
+    let resize = (w, h, el, flexDirection = 'column') => {
+        el.style.width = w + 'px'
+        el.style.height = h + 'px'
+        app.style.flexDirection = flexDirection
+    }
+
+    for (var i = 0; i < video_count; i++) {
+        let w = 0, h = 0
+        if (video_count == 1) { w = ow; h = oh; resize(w, h, app.children[i]); }
+
+        if (video_count == 2) {
+            if (ow > oh) { w = ow / 2; h = oh; }
+            else { w = ow; h = oh / 2; }
+            resize(w, h, app.children[i]);
+        }
+
+        if (video_count == 3) {
+            if (ow > oh) {
+                w = ow / 2
+                h = oh / 2
+                if (i == 2) h = oh
+                resize(w, h, app.children[i])
+            }
+            else {
+                w = ow / 2
+                h = oh / 2
+                if (i == 2) w = ow
+                resize(w, h, app.children[i], 'row')
+            }
+        }
+
+        if (video_count == 4) {
+            w = ow / 2
+            h = oh / 2
+            resize(w, h, app.children[i])
+        }
+
+        if (video_count == 5 || video_count == 6) {
+            if (ow > oh) { w = ow / 3; h = oh / 2; }
+            else { w = ow / 2; h = oh / 3; }
+            resize(w, h, app.children[i])
+        }
+
+        if (video_count > 6) {
+            if (ow > oh) { w = ow / 4; h = oh / 3; }
+            else { w = ow / 3; h = oh / 4; }
+            resize(w, h, app.children[i])
+        }
+    }
+
+}
 
 
 

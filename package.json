@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "express": "^4.17.2",
     "ws": "^8.4.0"
   },
   "scripts": {
@@ -8,7 +9,6 @@
   "name": "webrtc-demo",
   "version": "1.0.0",
   "main": "client.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/muba00/webrtc-demo.git"
