@@ -24,7 +24,7 @@ app.get('/style.css', (req, res) => {
 })
 
 
-/*
+
 var key = fs.readFileSync(path.join(__dirname + '/certs/key.pem'))
 var cert = fs.readFileSync(path.join(__dirname + '/certs/cert.pem'))
 var options = {
@@ -32,14 +32,13 @@ var options = {
     cert: cert
 }
 
-var server = https.createServer(options, app)
-server.listen(PORT)
-*/
+var server = https.createServer(options)
+//server.listen(PORT)
 
 app.listen(PORT)
 
 
-const ws_server = new WebSocket.Server({ port: 8433 })
+const ws_server = new WebSocket.Server({ server })
 
 const broadcast = (ws_server, data) => {
     ws_server.clients.forEach((client) => {
