@@ -33,7 +33,7 @@ var options = {
 }
 
 var server = https.createServer(options, app)
-server.listen(8443)
+server.listen(PORT)
 
 
 const ws_server = new WebSocket.Server({ server })
