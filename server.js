@@ -7,7 +7,7 @@ const https = require('https')
 const WebSocket = require('ws')
 
 
-const PORT = process.env.PORT || 3000
+const PORT = 3000
 const app = express()
 
 var key = fs.readFileSync(path.join(__dirname + '/certs/key.pem'))
