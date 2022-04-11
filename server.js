@@ -1,9 +1,7 @@
 
 const express = require('express')
 const path = require('path')
-const fs = require('fs')
-const https = require('https')
-
+const http = require('http')
 const WebSocket = require('ws')
 
 
@@ -25,17 +23,8 @@ app.get('/style.css', (req, res) => {
 
 
 
-var key = fs.readFileSync(path.join(__dirname + '/certs/key.pem'))
-var cert = fs.readFileSync(path.join(__dirname + '/certs/cert.pem'))
-var options = {
-    key: key,
-    cert: cert
-}
-
-var server = https.createServer(options)
-//server.listen(PORT)
-
-app.listen(PORT)
+var server = http.createServer(app)
+server.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 
 const ws_server = new WebSocket.Server({ server })
